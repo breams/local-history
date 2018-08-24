@@ -95,6 +95,7 @@ export class HistorySettings {
             exclude =  <string[]>config.get('exclude'),
             historyPath,
             absolute,
+            folderName = <string>config.get('folderName'),
             message = '';
 
         if (typeof enabled === 'boolean')
@@ -149,11 +150,11 @@ export class HistorySettings {
                         absolute = true;
                     historyPath = path.join (
                         historyPath,
-                        '.history');
+                        folderName);
                     } else if (workspacefolder) {
                         historyPath = path.join (
                             historyPath,
-                            '.history',
+                            folderName,
                             (historyWS && this.pathIsInside(workspacefolder.fsPath, historyWS.fsPath) ? '' : path.basename(workspacefolder.fsPath))
                         );
                     }
@@ -164,7 +165,7 @@ export class HistorySettings {
                 absolute = false;
                 historyPath = path.join(
                     workspacefolder.fsPath,
-                    '.history'
+                    folderName
                 );
             }
         }
